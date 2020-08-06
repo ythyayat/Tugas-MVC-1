@@ -20,4 +20,9 @@ class AuthController extends Controller
         ]; 
         return view('welcome',$data);
     }
+
+    public function table()
+    {
+        return view('tugas3/datatable');
+    }
 }
