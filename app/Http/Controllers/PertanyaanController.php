@@ -3,21 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB; 
+use App\Pertanyaan;
 
 class PertanyaanController extends Controller
 {
     
     public function index(){
-        $questions = DB::table('pertanyaan')->select()->get();
+        $questions = Pertanyaan::all();
         return view('pertanyaan/pertanyaan',compact('questions'));
     }
 
     public function show($req){
-        $questions = DB::table('pertanyaan')
-                    ->select()
-                    ->where('id', $req)
-                    ->first();
+        $questions = Pertanyaan::where('id', $req)->first();
+        
         //dd($questions);
         return view('pertanyaan/detail',compact('questions'));
     }
@@ -33,19 +32,16 @@ class PertanyaanController extends Controller
             'isi' => 'required|max:255',
         ]);
 
-        $query = DB::table('pertanyaan')->insert([
+        $query = Pertanyaan::create([
             'judul' => $request->judul,
             'isi' => $request->isi
         ]);
 
         return redirect('/pertanyaan')->with('berhasil','Data Berhasil Ditambahkan!');
-    }
+    }   
 
     public function edit($id){
-        $question = DB::table('pertanyaan')
-                    ->select()
-                    ->where('id', $id)
-                    ->first();
+        $question = Pertanyaan::where('id', $id)->first();
         return view('pertanyaan/edit', compact('question'));
     }
     public function update($id,Request $request){
@@ -55,16 +51,17 @@ class PertanyaanController extends Controller
             'isi' => 'required|max:255',
         ]);
 
-        $query = DB::table('pertanyaan')->where('id',$id)->update([
-            'judul' => $request->judul,
-            'isi' => $request->isi
-        ]);
+        $query = Pertanyaan::where('id',$id)
+            ->update([
+                'judul' => $request->judul,
+                'isi' => $request->isi 
+            ]);
 
         return redirect('/pertanyaan')->with('berhasil','Data Berhasil Diubah!');
     }
 
     public function destroy($id){
-        $query = DB::table('pertanyaan')->where('id',$id)->delete();
+        $query = Pertanyaan::destroy($id);
         return redirect('/pertanyaan')->with('berhasil','Data Berhasil Dihapus!');
     }
 
