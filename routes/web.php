@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PertanyaansController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,10 +22,10 @@ Route::post('/welcome', 'AuthController@welcome');
 Route::get('/data-tables', 'AuthController@table');
 
 //tugas 5
-Route::get('/pertanyaan', 'PertanyaanController@index');
-Route::get('/pertanyaan/create', 'PertanyaanController@create');
-Route::post('/pertanyaan', 'PertanyaanController@store');
-Route::get('/pertanyaan/{pertanyaan_id}', 'PertanyaanController@show');
-Route::get('/pertanyaan/{pertanyaan_id}/edit', 'PertanyaanController@edit');
-Route::put('/pertanyaan/{pertanyaan_id}', 'PertanyaanController@update');
-Route::delete('/pertanyaan/{pertanyaan_id}', 'PertanyaanController@destroy');
+
+
+Route::resource('pertanyaan','PertanyaansController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
