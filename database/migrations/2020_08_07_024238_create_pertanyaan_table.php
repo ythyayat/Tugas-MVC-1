@@ -17,8 +17,8 @@ class CreatePertanyaanTable extends Migration
             $table->id();
             $table->string('judul',45);
             $table->string('isi',255);
-            $table->unsignedBigInteger('profil_id')->nullable();
-            $table->foreign('profil_id')->references('id')->on('profils');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

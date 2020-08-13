@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Pertanyaan;
+use Illuminate\Support\Facades\Auth;
 
 class PertanyaansController extends Controller
 {
@@ -46,9 +47,11 @@ class PertanyaansController extends Controller
             'isi' => 'required|max:255',
         ]);
 
+        $id = Auth::id();
         $query = Pertanyaan::create([
             'judul' => $request->judul,
-            'isi' => $request->isi
+            'isi' => $request->isi,
+            'user_id' => $id
         ]);
 
         return redirect('/pertanyaan')->with('berhasil','Data Berhasil Ditambahkan!');

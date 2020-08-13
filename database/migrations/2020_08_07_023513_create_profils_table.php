@@ -18,6 +18,8 @@ class CreateProfilsTable extends Migration
             $table->string('nama_lengkap',100);
             $table->string('email',45);
             $table->string('foto',45);
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
