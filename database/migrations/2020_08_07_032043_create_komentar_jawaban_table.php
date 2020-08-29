@@ -16,8 +16,8 @@ class CreateKomentarJawabanTable extends Migration
         Schema::create('komentar_jawaban', function (Blueprint $table) {
             $table->id();
             $table->string('isi',255);
-            $table->unsignedBigInteger('profil_id');
-            $table->foreign('profil_id')->references('id')->on('profils');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('jawaban_id');
             $table->foreign('jawaban_id')->references('id')->on('jawaban');
             $table->timestamps();
